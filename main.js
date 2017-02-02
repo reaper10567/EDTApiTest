@@ -62,8 +62,21 @@
 		$.getJSON(fullURL).done(function(data){
 			//use the data somehow
 			console.log(data);
+			
+			HandleItems(data.items);
+			HandleStats(data.stats);
+			HandleGuild(data.guild);
 		}).fail(function(){
 			//let the user know their data was bad. D:
 			document.querySelector("#fail").innerHTML = "Failed to get that character/realm combination. make sure you all of the information is correct and try again.";
 		});
+	}
+	
+	function HandleItems(data){
+	}
+	
+	function HandleStats(data){
+	}
+	
+	function HandleGuild(data){
 	}
