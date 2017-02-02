@@ -45,6 +45,7 @@
 	}
 	
 	function Search(){
+		document.querySelector("#fail").innerHTML = "";
 		//get which locale to search and build the full URL.
 		var locale = document.getElementById("region").value;
 		var fullURL;
