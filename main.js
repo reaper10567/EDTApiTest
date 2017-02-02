@@ -26,7 +26,7 @@
 			fullURL = EUBaseURL + realmStatusURL + GBLocaleURL + keyURL;
 		}
 		else{
-			fullURL = USBaseURL + realmStatusURL + USBaseURL + keyURL;
+			fullURL = USBaseURL + realmStatusURL + USLocaleURL + keyURL;
 		}
 		//jquery makes life so much easier. Q.Q
 		$.getJSON(fullURL).done(function(data){
