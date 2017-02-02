@@ -37,7 +37,7 @@
 			//in with the new
 			for(var i=0; i < realmData.length; i++){
 				var individualRealm = realmData[i];
-				select.options.add(new Option(individualRealm.name,individualRealm.name));
+				selec.options.add(new Option(individualRealm.name,individualRealm.name));
 			}
 		});
 	}
