@@ -51,7 +51,7 @@
 		var fullURL;
 		//get the character name and realm
 		var characterName = document.querySelector("#characterName").value;
-		var realm = document.querySelector("#realm");
+		var realm = document.querySelector("#realm").value;
 		if(locale == "EU"){
 			fullURL = EUBaseURL + characterProfileURL + realm + '/' + characterName + GBLocaleURL + searchFields + keyURL;
 		}
