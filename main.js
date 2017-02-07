@@ -10,7 +10,12 @@
 	var characterProfileURL = "/wow/character/";
 	var realmStatusURL = "/wow/realm/status"
 	
-	var searchFields = "&fields=stats,items,guild"
+	var achievementsURL = "/wow/Achievement/"
+	
+	var searchFields = "&fields=stats,items,guild,achievements";
+	//THUMBNAIL URL is region + battlenet + static-render + region + string from API
+	
+	var previousSearches = [];
 	
 	window.onload = function(){
 		//setup the function on the button to do stuffs
@@ -60,12 +65,15 @@
 		}
 		//jquery makes life so much easier. Q.Q, also deferred stuff is great. i love it.
 		$.getJSON(fullURL).done(function(data){
-			//use the data somehow
-			console.log(data);
+			//basic info
+			document.querySelector("#chrName").value = data.name;
+			document.querySelector("#chrLvl").value = data.level;
+			docment.querySelector("#guildName").value = data.guild.name;
 			
+			//more complex info
 			HandleItems(data.items);
 			HandleStats(data.stats);
-			HandleGuild(data.guild);
+			HandleAchievements(data.achievements);
 		}).fail(function(){
 			//let the user know their data was bad. D:
 			document.querySelector("#fail").innerHTML = "Failed to get that character/realm combination. make sure you all of the information is correct and try again.";
@@ -76,7 +84,57 @@
 	}
 	
 	function HandleStats(data){
+		//main stats
+		document.querySelector("#strVal").value = data.str;
+		document.querySelector("#agiVal").value = data.agi;
+		document.querySelector("#intVal").value = data.int;
+		document.querySelector("#stamVal").value = data.sta;
+		
+		//attack
+		document.querySelector("#dmgVal").value = data.mainHandDmgMin + "-" + data.mainHandDmgMax + "/" data.offHandDmgMin + "-" data.offHandDmgMax;
+		document.querySelector("#speedVal").value = data.mainHandSpeed + "/" + data.offHandSpeed;
+		
+		//spell
+		document.querySelector("#manaRgnVal").value = data.mana5;
+		document.querySelector("#spellCritVal").value = data.spellCrit + "%";
+		document.querySelector("#spellPenVal").value = data.spellPen + "%";
+		
+		//defence
+		document.querySelector("#armorVal").value = data.armor;
+		document.querySelector("#dodgeVal").value = data.dodge + "%";
+		document.querySelector("#parryVal").value = data.parry + "%";
+		document.querySelector("#blockVal").value = data.block + "%";
+		
+		//enhancements
+		document.querySelector("#critVal").value = data.crit + "%";
+		document.querySelector("#hasteVal").value = data.hasteRatingPercent + "%";
+		document.querySelector("#masteryVal").value = data.mastery + "%";
+		document.querySelector("#leechVal").value = data.leech + "%";
+		document.querySelector("#versatilityVal").value = data.versatility + "%";
 	}
 	
-	function HandleGuild(data){
+	function HandleAchievements(data){
+		var mostRecent = 0;
+		var indexOfMostRecent = 0;
+		for(var i=0; i < data.achievementsCompletedTimestamp; i++)
+		{
+			if(data.achievementsCompletedTimestamp[i] > mostRecent)
+			{
+				mostRecent = data.achievementsCompletedTimestamp[i];
+				indexOfMostRecent = i;
+			}
+		}
+		
+		var locale = document.getElementById("region").value;
+		var fullURL;
+		if(locale == "EU"){
+			fullURL = EUBaseURL + achievementsURL + data.achievements.achievementsCompleted[indexOfMostRecent] + GBLocaleURL + keyURL;
+		}
+		else{
+			fullURL = USBaseURL + achievementsURL + data.achievements.achievementsCompleted[indexOfMostRecent] + USLocaleURL + keyURL;
+		}
+		
+		$.getJSON(fullURL).done(function(data){
+			document.querySelector("#latestAchiev").value = data.title;
+		});
 	}

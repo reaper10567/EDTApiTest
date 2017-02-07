@@ -7,8 +7,6 @@
 		<script type="text/javascript" src="main.js"></script>
 	</head>
 	<body>
-		<h1>Testing github's hosting!</h1>
-		<p>NEEDS MOAR TESTING</p>
 		<div id="inputs">
 			<input type="text" name="characterName" id="characterName" value="Character Name"> </br>
 			<select name="region" id="region">
@@ -20,6 +18,45 @@
 			<button id="search">Search</button>
 		</div>
 		<div id="output">
+			<div id="playerInfoBlock">
+				<label>Character Name:</label><label id="chrName"></label>
+				<label>Level:</label><label id="chrLvl"></label>
+				<label>Guild:</label><label id="guildName"></label>
+				<label>Latest Acheivement:</label><label id="latestAcheiv"></label>
+			</div>
+			<div id="statBlock">
+				<div id="attributes">
+					<label>Strength</label><label id="strVal"></label><label id="compareStr"></label></br>
+					<label>Agility</label><label id="agiVal"></label><label id="compareAgi"></label></br>
+					<label>Intellect</label><label id="intVal"></label><label id="compareInt"></label></br>
+					<label>Stamina</label><label id="stamVal"></label><label id="compareStam"></label></br>
+				</div>
+				<div id="attack">
+					<label>Damage</label><label id="dmgVal"></label><label id="compareDmg"></label></br>
+					<label>Speed</label><label id="speedVal"></label><label id="compareSpd"></label></br>
+				</div>
+				<div id="spell">
+					<label>Mana Regen</label><label id="manaRgnVal"></label><label id="compareManaRgn"></label></br>
+					<label>Spell Crit</label><label id="spellCritVal"></label><label id="compareSpellCrit"></label></br>
+					<label>Spell Pen</label><label id="spellPenVal"></label><label id="compareSpellPen"></label></br>
+				</div>
+				<div id="defence">
+					<label>Armor</label><label id="armorVal"></label><label id="compareArmor"></label></br>
+					<label>Dodge</label><label id="dodgeVal"></label><label id="compareDodge"></label></br>
+					<label>Parry</label><label id="parryVal"></label><label id="compareParry"></label></br>
+					<label>Block</label><label id="blockVal"></label><label id="compareBlk"></label></br>
+				</div>
+				<div id="enhancements">
+					<label>Crit</label><label id="critVal"></label><label id="compareCrit"></label></br>
+					<label>Haste</label><label id="hasteVal"></label><label id="compareHaste"></label></br>
+					<label>Mastery</label><label id="masteryVal"></label><label id="compareMastery"></label></br>
+					<label>Leech</label><label id="leechVal"></label><label id="compareLeech"></label></br>
+					<label>Versatility</label><label id="versatilityVal"></label><label id="compareVers"></label></br>
+				</div>
+				<div id="compareBlock"></div>
+			</div>
+			<div id="itemBlock">
+			</div>
 			<p id="fail"></p>
 		</div>
 	</body>
