@@ -91,7 +91,7 @@
 		document.querySelector("#stamVal").value = data.sta;
 		
 		//attack
-		document.querySelector("#dmgVal").value = data.mainHandDmgMin + "-" + data.mainHandDmgMax + "/" data.offHandDmgMin + "-" data.offHandDmgMax;
+		document.querySelector("#dmgVal").value = data.mainHandDmgMin + "-" + data.mainHandDmgMax + "/" + data.offHandDmgMin + "-" + data.offHandDmgMax;
 		document.querySelector("#speedVal").value = data.mainHandSpeed + "/" + data.offHandSpeed;
 		
 		//spell
