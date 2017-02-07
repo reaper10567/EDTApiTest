@@ -68,7 +68,7 @@
 			//basic info
 			document.querySelector("#chrName").value = data.name;
 			document.querySelector("#chrLvl").value = data.level;
-			docment.querySelector("#guildName").value = data.guild.name;
+			document.querySelector("#guildName").value = data.guild.name;
 			
 			//more complex info
 			HandleItems(data.items);
