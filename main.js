@@ -128,10 +128,10 @@
 		var locale = document.getElementById("region").value;
 		var fullURL;
 		if(locale == "EU"){
-			fullURL = EUBaseURL + achievementsURL + data.achievements.achievementsCompleted[indexOfMostRecent] + GBLocaleURL + keyURL;
+			fullURL = EUBaseURL + achievementsURL + data.achievementsCompleted[indexOfMostRecent] + GBLocaleURL + keyURL;
 		}
 		else{
-			fullURL = USBaseURL + achievementsURL + data.achievements.achievementsCompleted[indexOfMostRecent] + USLocaleURL + keyURL;
+			fullURL = USBaseURL + achievementsURL + data.achievementsCompleted[indexOfMostRecent] + USLocaleURL + keyURL;
 		}
 		
 		$.getJSON(fullURL).done(function(data){
