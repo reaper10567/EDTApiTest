@@ -10,7 +10,7 @@
 	var characterProfileURL = "/wow/character/";
 	var realmStatusURL = "/wow/realm/status"
 	
-	var achievementsURL = "/wow/Achievement/"
+	var achievementsURL = "/wow/achievement/"
 	
 	var searchFields = "&fields=stats,items,guild,achievements";
 	//THUMBNAIL URL is region + battlenet + static-render + region + string from API
@@ -116,7 +116,7 @@
 	function HandleAchievements(data){
 		var mostRecent = 0;
 		var indexOfMostRecent = 0;
-		for(var i=0; i < data.achievementsCompletedTimestamp; i++)
+		for(var i=0; i < data.achievementsCompletedTimestamp.length; i++)
 		{
 			if(data.achievementsCompletedTimestamp[i] > mostRecent)
 			{
