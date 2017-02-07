@@ -66,9 +66,9 @@
 		//jquery makes life so much easier. Q.Q, also deferred stuff is great. i love it.
 		$.getJSON(fullURL).done(function(data){
 			//basic info
-			document.querySelector("#chrName").value = data.name;
-			document.querySelector("#chrLvl").value = data.level;
-			document.querySelector("#guildName").value = data.guild.name;
+			document.querySelector("#chrName").innerHTML = data.name;
+			document.querySelector("#chrLvl").innerHTML = data.level;
+			document.querySelector("#guildName").innerHTML = data.guild.name;
 			
 			//more complex info
 			HandleItems(data.items);
@@ -85,32 +85,32 @@
 	
 	function HandleStats(data){
 		//main stats
-		document.querySelector("#strVal").value = data.str;
-		document.querySelector("#agiVal").value = data.agi;
-		document.querySelector("#intVal").value = data.int;
-		document.querySelector("#stamVal").value = data.sta;
+		document.querySelector("#strVal").innerHTML = data.str;
+		document.querySelector("#agiVal").innerHTML = data.agi;
+		document.querySelector("#intVal").innerHTML = data.int;
+		document.querySelector("#stamVal").innerHTML = data.sta;
 		
 		//attack
-		document.querySelector("#dmgVal").value = data.mainHandDmgMin + "-" + data.mainHandDmgMax + "/" + data.offHandDmgMin + "-" + data.offHandDmgMax;
-		document.querySelector("#speedVal").value = data.mainHandSpeed + "/" + data.offHandSpeed;
+		document.querySelector("#dmgVal").innerHTML = data.mainHandDmgMin + "-" + data.mainHandDmgMax + "/" + data.offHandDmgMin + "-" + data.offHandDmgMax;
+		document.querySelector("#speedVal").innerHTML = data.mainHandSpeed + "/" + data.offHandSpeed;
 		
 		//spell
-		document.querySelector("#manaRgnVal").value = data.mana5;
-		document.querySelector("#spellCritVal").value = data.spellCrit + "%";
-		document.querySelector("#spellPenVal").value = data.spellPen + "%";
+		document.querySelector("#manaRgnVal").innerHTML = data.mana5;
+		document.querySelector("#spellCritVal").innerHTML = data.spellCrit + "%";
+		document.querySelector("#spellPenVal").innerHTML = data.spellPen + "%";
 		
 		//defence
-		document.querySelector("#armorVal").value = data.armor;
-		document.querySelector("#dodgeVal").value = data.dodge + "%";
-		document.querySelector("#parryVal").value = data.parry + "%";
-		document.querySelector("#blockVal").value = data.block + "%";
+		document.querySelector("#armorVal").innerHTML = data.armor;
+		document.querySelector("#dodgeVal").innerHTML = data.dodge + "%";
+		document.querySelector("#parryVal").innerHTML = data.parry + "%";
+		document.querySelector("#blockVal").innerHTML = data.block + "%";
 		
 		//enhancements
-		document.querySelector("#critVal").value = data.crit + "%";
-		document.querySelector("#hasteVal").value = data.hasteRatingPercent + "%";
-		document.querySelector("#masteryVal").value = data.mastery + "%";
-		document.querySelector("#leechVal").value = data.leech + "%";
-		document.querySelector("#versatilityVal").value = data.versatility + "%";
+		document.querySelector("#critVal").innerHTML = data.crit + "%";
+		document.querySelector("#hasteVal").innerHTML = data.hasteRatingPercent + "%";
+		document.querySelector("#masteryVal").innerHTML = data.mastery + "%";
+		document.querySelector("#leechVal").innerHTML = data.leech + "%";
+		document.querySelector("#versatilityVal").innerHTML = data.versatility + "%";
 	}
 	
 	function HandleAchievements(data){
@@ -135,6 +135,6 @@
 		}
 		
 		$.getJSON(fullURL).done(function(data){
-			document.querySelector("#latestAchiev").value = data.title;
+			document.querySelector("#latestAchiev").innerHTML = data.title;
 		});
 	}
