@@ -13,9 +13,10 @@
 	var achievementsURL = "/wow/achievement/"
 	
 	var searchFields = "&fields=stats,items,guild,achievements";
-	//THUMBNAIL URL is region + battlenet + static-render + region + string from API
+	
 	
 	var previousSearches = [];
+	var previousSearchesLocale = [];
 	
 	window.onload = function(){
 		//setup the function on the button to do stuffs
@@ -74,13 +75,51 @@
 			HandleItems(data.items);
 			HandleStats(data.stats);
 			HandleAchievements(data.achievements);
+			
+			//store up to 6 searches for comparison purposes.
+			if(previousSearches.length > 6)
+			{
+				for(var i =0; i < previousSearches.length-1; i++)
+				{
+					previousSearches[i] = previousSearches[i+1];
+					previousSearchesLocale[i] = previousSearches[i+1];
+				}
+			}
+			previousSearches.push(data);
+			previousSearchesLocale.push(locale);
+			RefreshComparisonChoices();
 		}).fail(function(){
 			//let the user know their data was bad. D:
 			document.querySelector("#fail").innerHTML = "Failed to get that character/realm combination. make sure you all of the information is correct and try again.";
 		});
 	}
 	
+	function RefreshComparisonChoices(){
+		
+		for(var i=0; i < previousSearches.length; i++)
+		{
+			if(document.querySelector("#compare"+i).hasChildNodes()){
+				document.querySelector("#compare"+i).removeChild(document.querySelector("#compare"+i).childNodes[0]);
+			}
+			var newButton = document.createElement("button");
+			newButton.id = "compareButton";
+			newButton.value = i;
+			newButton.style.minHeight = "85px";
+			newButton.style.minWidth = "100px";
+			
+			//THUMBNAIL URL is region + battlenet + static-render + region + string from API
+			if(previousSearchesLocale[i] == "EU"){
+				newButton.style.backgroundImage = "url(https://eu.battle.net/static-render/eu/"+previousSearches[i].thumbnail+")";
+			}
+			else{
+				newButton.style.backgroundImage = "url(https://us.battle.net/static-render/us/"+previousSearches[i].thumbnail+")";
+			}
+			document.querySelector("#compare"+i).appendChild(newButton);
+		}
+	}
+	
 	function HandleItems(data){
+		//populate character equipment info here
 	}
 	
 	function HandleStats(data){
@@ -116,10 +155,8 @@
 	function HandleAchievements(data){
 		var mostRecent = 0;
 		var indexOfMostRecent = 0;
-		for(var i=0; i < data.achievementsCompletedTimestamp.length; i++)
-		{
-			if(data.achievementsCompletedTimestamp[i] > mostRecent)
-			{
+		for(var i=0; i < data.achievementsCompletedTimestamp.length; i++){
+			if(data.achievementsCompletedTimestamp[i] > mostRecent){
 				mostRecent = data.achievementsCompletedTimestamp[i];
 				indexOfMostRecent = i;
 			}
