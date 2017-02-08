@@ -14,9 +14,13 @@
 	
 	var searchFields = "&fields=stats,items,guild,achievements";
 	
+	var maxPreviousSearches = 6;
+	
 	
 	var previousSearches = [];
 	var previousSearchesLocale = [];
+	
+	var allStats = ["str","agi","int","sta", "mana5", "spellCrit", "spellPen", "armor", "dodge", "parry", "block","crit", "hasteRatingPercent", "mastery", "leech", "versatility"];
 	
 	window.onload = function(){
 		//setup the function on the button to do stuffs
@@ -51,7 +55,11 @@
 	}
 	
 	function Search(){
+		$("#output").fadeOut(250);
+		$("#fail").fadeOut(250);
 		document.querySelector("#fail").innerHTML = "";
+		document.querySelector("#compName").innerHTML = "";
+		ResetComparisonNumbers();
 		//get which locale to search and build the full URL.
 		var locale = document.getElementById("region").value;
 		var fullURL;
@@ -77,35 +85,48 @@
 			HandleAchievements(data.achievements);
 			
 			//store up to 6 searches for comparison purposes.
-			if(previousSearches.length > 6)
+			if(previousSearches.length >= maxPreviousSearches)
 			{
-				for(var i =0; i < previousSearches.length-1; i++)
-				{
-					previousSearches[i] = previousSearches[i+1];
-					previousSearchesLocale[i] = previousSearches[i+1];
-				}
+				previousSearches.shift();
+				previousSearchesLocale.shift();
 			}
 			previousSearches.push(data);
 			previousSearchesLocale.push(locale);
 			RefreshComparisonChoices();
+			$("#output").fadeIn(1000);
 		}).fail(function(){
 			//let the user know their data was bad. D:
 			document.querySelector("#fail").innerHTML = "Failed to get that character/realm combination. make sure you all of the information is correct and try again.";
+			$("#fail").fadeIn(250);
 		});
+	}
+	
+	function ResetComparisonNumbers(){
+		var allCompBoxes = document.getElementsByClassName("comp");
+		for(var i=0; i < allCompBoxes.length; i++){
+			allCompBoxes[i].innerHTML = '';
+		}
 	}
 	
 	function RefreshComparisonChoices(){
 		
-		for(var i=0; i < previousSearches.length; i++)
-		{
-			if(document.querySelector("#compare"+i).hasChildNodes()){
-				document.querySelector("#compare"+i).removeChild(document.querySelector("#compare"+i).childNodes[0]);
+		for(var i = 0; i < maxPreviousSearches/2; i++){
+			var parentNode = document.querySelector("#compare"+i);
+			while(parentNode.hasChildNodes()){
+				parentNode.removeChild(parentNode.lastChild);
 			}
+		}
+		
+		for(var i=0; i < previousSearches.length; i++){
+			var parentNode = document.querySelector("#compare"+(i%3));
+
 			var newButton = document.createElement("button");
 			newButton.id = "compareButton";
 			newButton.value = i;
 			newButton.style.minHeight = "85px";
 			newButton.style.minWidth = "100px";
+			newButton.className = "compButton";
+			newButton.onclick = Compare;
 			
 			//THUMBNAIL URL is region + battlenet + static-render + region + string from API
 			if(previousSearchesLocale[i] == "EU"){
@@ -114,7 +135,32 @@
 			else{
 				newButton.style.backgroundImage = "url(https://us.battle.net/static-render/us/"+previousSearches[i].thumbnail+")";
 			}
-			document.querySelector("#compare"+i).appendChild(newButton);
+			parentNode.appendChild(newButton);
+		}
+	}
+	
+	function Compare(data){
+		var allStatBoxes = document.getElementsByClassName("val");
+		var allCompBoxes = document.getElementsByClassName("comp");
+		document.querySelector("#compName").innerHTML = "Comparing to: " + previousSearches[data.target.value].name;
+		for(var i = 0; i < allStatBoxes.length; i++){
+			var currStat = allStats[i];
+			var currStatBoxVal = parseFloat(allStatBoxes[i].innerHTML.replace('%',''));
+			var currCompBox = allCompBoxes[i];
+
+			var difference = currStatBoxVal-parseFloat(previousSearches[data.target.value].stats[currStat]);
+			currCompBox.innerHTML = Math.abs(difference);
+			if(difference > 0){
+				currCompBox.style.color = "green";
+				currCompBox.innerHTML += '&#8593;';
+			}
+			else if(difference == 0){
+			}
+			else{
+				currCompBox.style.color = "red";
+				currCompBox.innerHTML += '&#8595';
+			}
+			
 		}
 	}
 	
