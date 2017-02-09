@@ -25,11 +25,27 @@ p{
 
 .att{
 	color: #007203;
-	font-size: 106%
+	font-size: 106%;
 }
 
 .staticField{
 	font-weight: bold;
+}
+
+.item{
+	position: absolute;
+	margin: 0%;
+	left: 25%;
+}
+
+.price{
+	position: absolute;
+	left: 80%;
+	margin: 0%;
+}
+.gold{
+	position:absolute;
+	left: 90%;
 }
 
 
@@ -41,6 +57,43 @@ p{
 	height: 20%;
 	top: 15%;
 }
+::-webkit-input-placeholder{
+	color:black;
+	opacity: .6;
+}
+
+::-moz-placeholder{
+	color:black;
+	opacity:.6;
+}
+
+
+#characterName{
+	width: 35%;
+	border: 2px solid black;
+	background-color: rgba(120,197,141,.7);
+	text-align: center;
+}
+
+#region{
+	border: 2px solid black;
+	background-color: rgba(120,197,141,.7);
+	text-align: center;
+}
+
+#realm{
+	border: 2px solid black;
+	background-color: rgba(120,197,141,.7);
+	text-align: center;
+}
+
+#search{
+	width: 35%;
+	background-color: rgba(120,197,141,.7);
+	margin: .5%;
+	padding: .5%;
+	border:2px solid black;
+}
 
 #playerInfoBlock{
 	position: relative;
@@ -48,6 +101,8 @@ p{
 	width: 80%;
 	background-color: rgba(120,197,141,.6);
 	text-align: center;
+	
+	border: 2px solid black;
 }
 
 #output{
@@ -60,22 +115,27 @@ p{
 }
 
 #statBlock{
-	position: relative;
-	top: 20%;
+	position: absolute;
+	top: 15.65%;
 	bottom: 80%;
 	width: 20%;
-	height: 65%;
+	height: 75%;
 	left: 5%;
 	background-color: rgba(120,197,141,.6);
+	border-left: 2px solid black;
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
 }
 
 #statBlock2{
-	position: relative;
-	bottom: 48.2%;
-	left: 25%;
+	position: absolute;
+	top: 15.65%;
+	left: 25.1%;
 	width: 15%;
-	height: 65%;
+	height: 74.8%;
 	background-color: rgba(120,197,141,.6);
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
 }
 
 #attributes{
@@ -114,12 +174,15 @@ p{
 }
 
 #compareBlock{
-	position: relative;
-	left: 40%;
-	bottom: 116.4%;
+	position: absolute;
+	left: 40.1%;
+	bottom: 8.7%;
 	width: 20%;
-	height: 65%;
+	height: 74.9%;
 	background-color: rgba(120,197,141,.6);
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
+	border-right: 2px solid black;
 }
 #compare0{
 	top: 5%;
@@ -132,6 +195,17 @@ p{
 #compare2{
 	top: 5%;
 	position: relative;
+}
+
+#itemBlock{
+	position: absolute;
+	left:70%;
+	background-color: rgba(120,197,141,.6);
+	top: 15.65%;
+	width: 25%;
+	height: 75%;
+	border: 2px solid black;
+	margin: 0%;
 }
 #fail{
 	text-align: center;

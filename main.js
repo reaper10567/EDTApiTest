@@ -8,19 +8,25 @@
 	var USBaseURL = "https://us.api.battle.net";
 	var EUBaseURL = "https://eu.api.battle.net";
 	var characterProfileURL = "/wow/character/";
-	var realmStatusURL = "/wow/realm/status"
+	var realmStatusURL = "/wow/realm/status";
 	
-	var achievementsURL = "/wow/achievement/"
+	var achievementsURL = "/wow/achievement/";
+	
+	var itemURL = "/wow/item/"
 	
 	var searchFields = "&fields=stats,items,guild,achievements";
 	
 	var maxPreviousSearches = 6;
+	
+	var copperToGold = 10000;
 	
 	
 	var previousSearches = [];
 	var previousSearchesLocale = [];
 	
 	var allStats = ["str","agi","int","sta", "mana5", "spellCrit", "spellPen", "armor", "dodge", "parry", "block","crit", "hasteRatingPercent", "mastery", "leech", "versatility"];
+	
+	var allItemSlots = ["head","chest","shoulder","legs","feet","trinket1","back"];
 	
 	window.onload = function(){
 		//setup the function on the button to do stuffs
@@ -142,7 +148,7 @@
 	function Compare(data){
 		var allStatBoxes = document.getElementsByClassName("val");
 		var allCompBoxes = document.getElementsByClassName("comp");
-		document.querySelector("#compName").innerHTML = "Comparing to: " + previousSearches[data.target.value].name;
+		document.querySelector("#compName").innerHTML = "Comparing to: " + previousSearches[data.target.value].name + " of " + previousSearchesLocale[data.target.value] + " " + previousSearches[data.target.value].realm;
 		for(var i = 0; i < allStatBoxes.length; i++){
 			var currStat = allStats[i];
 			var currStatBoxVal = parseFloat(allStatBoxes[i].innerHTML.replace('%',''));
@@ -166,6 +172,30 @@
 	
 	function HandleItems(data){
 		//populate character equipment info here
+		//console.log(data);
+		var locale = document.getElementById("region").value;
+		
+		
+		for(var i=0; i < allItemSlots.length; i++){
+			(function(i){
+				var fullURL;
+			
+				var currentItemType = allItemSlots[i];
+				var currentItem = data[allItemSlots[i]];
+				document.querySelector("#"+currentItemType).innerHTML = currentItem.name;
+			
+				if(locale == "EU"){
+					fullURL = EUBaseURL + itemURL + currentItem.id + GBLocaleURL + keyURL;
+				}
+				else{
+					fullURL = USBaseURL + itemURL + currentItem.id + USLocaleURL + keyURL;
+				}
+			
+				$.getJSON(fullURL).done(function(data){
+					document.querySelector("#"+allItemSlots[i]+"Price").innerHTML = Math.floor(data.buyPrice/copperToGold);
+				});
+			})(i);
+		}
 	}
 	
 	function HandleStats(data){
