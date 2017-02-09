@@ -25,11 +25,22 @@ p{
 
 .att{
 	color: #007203;
-	font-size: 106%;
+	font-size: 110%;
 }
 
 .staticField{
+	font-weight: bold;	
+}
+
+.itemField{
+	margin-left: 2%;
 	font-weight: bold;
+}
+
+.itemAtt{
+	margin-left: 2%;
+	color: #007203;
+	font-size: 110%;
 }
 
 .item{
@@ -46,6 +57,14 @@ p{
 .gold{
 	position:absolute;
 	left: 90%;
+}
+
+#edtLogo{
+	position: fixed;
+	text-align: center;
+	left: 40%;
+	width: 20%;
+	height: 10%;
 }
 
 
@@ -97,8 +116,8 @@ p{
 
 #playerInfoBlock{
 	position: relative;
-	left: 10%;
-	width: 80%;
+	left: 5%;
+	width: 90%;
 	background-color: rgba(120,197,141,.6);
 	text-align: center;
 	
@@ -183,6 +202,7 @@ p{
 	border-top: 2px solid black;
 	border-bottom: 2px solid black;
 	border-right: 2px solid black;
+	padding-left: 2%;
 }
 #compare0{
 	top: 5%;
